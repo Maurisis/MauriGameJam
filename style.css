@@ -125,14 +125,15 @@ header{
   align-items:center;
   justify-content:center;
   text-align:center;
-  /* AGREGAR banner.jpg EN ESTA MISMA CARPETA — se usa como fondo del hero */
+  
   background-image:
     linear-gradient(180deg, rgba(18,18,18,0.55) 0%, rgba(26,26,26,0.55) 55%, rgba(18,18,18,0.95) 100%),
-    url('../banner.jpg');
+    url('banner.png');  /* ← ← ← SACÁ el "../" */
+  
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  background-color:var(--cielo); /* color de respaldo mientras no está banner.jpg */
+  background-color:var(--cielo);
   padding:140px 20px 80px;
 }
 
