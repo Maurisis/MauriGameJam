@@ -3,176 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ MAURIPROD GAME JAM ⚡️</title>
+    <title>Mauriprod Game Jam - AGRO VS ROBÓTICA</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&family=Russo+One&display=swap" rel="stylesheet">
+    
+    <!-- 
+    ================================================================
+    IMPORTANTE: AGREGAR banner.jpg EN ESTA MISMA CARPETA
+    La imagen debe estar en la misma carpeta que este index.html
+    Estructura esperada:
+    mauriprod-gamejam/
+    ├── index.html
+    └── banner.jpg
+    ================================================================
+    -->
+    
     <style>
+        /* ============================================
+           VARIABLES DE COLOR (extraídas del banner)
+           ============================================ */
+        :root {
+            --violeta: #7B2FBE;
+            --verde: #4CAF50;
+            --rojo: #E53935;
+            --azul-cielo: #87CEEB;
+            --negro: #1a1a1a;
+            --gris-oscuro: #2d2d2d;
+            --blanco: #FFFFFF;
+            --gradiente-violeta: linear-gradient(135deg, #7B2FBE 0%, #9b4ddb 100%);
+            --gradiente-hero: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.9));
+        }
+
+        /* ============================================
+           RESET Y ESTILOS BASE
+           ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--negro);
+            color: var(--blanco);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
+        h1, h2, h3, h4 {
+            font-family: 'Russo One', sans-serif;
+            text-transform: uppercase;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 20px;
         }
 
+        /* ============================================
+           HEADER / NAVBAR FIJO
+           ============================================ */
         header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        .theme {
-            font-size: 2rem;
-            color: #ffd700;
-            margin-bottom: 30px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-        }
-
-        .theme-icons {
-            font-size: 3rem;
-            margin-top: 10px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--violeta);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--blanco);
+            text-shadow: 0 0 10px var(--violeta);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--violeta);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--violeta);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--violeta);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--blanco);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ============================================
+           HERO SECTION CON BANNER.JPG
+           ============================================
+           IMPORTANTE: La imagen banner.jpg debe estar en la misma carpeta
+           ============================================ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            
+            /* 
+            ================================================================
+            IMAGEN DE FONDO: banner.jpg
+            La imagen debe estar en la misma carpeta que index.html
+            ================================================================
+            */
+            background-image: url('banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Overlay oscuro para mejorar legibilidad del texto */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradiente-hero);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
             animation: fadeInUp 1s ease-out;
         }
 
-        .prize-section {
-            text-align: center;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 165, 0, 0.2) 100%);
-            border-color: rgba(255, 215, 0, 0.4);
-        }
-
-        .prize-icon {
-            font-size: 4rem;
+        .hero-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--blanco);
+            text-shadow: 
+                0 0 20px var(--violeta),
+                0 0 40px var(--violeta),
+                4px 4px 0 var(--negro);
             margin-bottom: 20px;
+            letter-spacing: 3px;
+            line-height: 1.1;
         }
 
-        .prize-amount {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        .hero-title span {
+            color: var(--violeta);
+            text-shadow: 
+                0 0 20px var(--violeta),
+                0 0 40px var(--violeta),
+                4px 4px 0 var(--negro);
         }
 
-        .countdown-section {
-            text-align: center;
-        }
-
-        .countdown-title {
-            font-size: 1.8rem;
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--verde);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             margin-bottom: 30px;
-            color: #ffd700;
+            font-weight: 700;
         }
 
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+        .hero-icons {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 30px;
         }
 
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
+        /* ============================================
+           SECCIÓN DE FECHAS DESTACADA
+           ============================================ */
+        .fechas-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--negro) 0%, var(--gris-oscuro) 100%);
+        }
+
+        .fechas-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .fecha-card {
+            background: rgba(45, 45, 45, 0.8);
+            border: 3px solid var(--violeta);
             border-radius: 15px;
-            min-width: 120px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            transition: transform 0.3s ease;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(123, 47, 190, 0.3);
         }
 
-        .countdown-item:hover {
-            transform: scale(1.05);
-            border-color: rgba(255, 215, 0, 0.6);
+        .fecha-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(123, 47, 190, 0.5);
+            border-color: var(--verde);
         }
 
-        .countdown-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ffd700;
+        .fecha-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--blanco);
+        }
+
+        .fecha-card p {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .fecha-card.first {
+            border-left: 5px solid var(--verde);
+        }
+
+        .fecha-card.second {
+            border-right: 5px solid var(--rojo);
+        }
+
+        .fecha-banner-central {
+            background: var(--gradiente-violeta);
+            padding: 30px 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(123, 47, 190, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .fecha-banner-central h2 {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: var(--blanco);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .fecha-banner-central .highlight {
+            color: var(--verde);
+            font-size: 1.4em;
+        }
+
+        /* ============================================
+           SECCIÓN DE CATEGORÍAS
+           ============================================ */
+        .categorias-section {
+            padding: 100px 0;
+            background: var(--negro);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 60px;
+            color: var(--blanco);
+            text-shadow: 0 0 20px var(--violeta);
+        }
+
+        .section-title span {
+            color: var(--violeta);
+        }
+
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .categoria-card {
+            background: rgba(45, 45, 45, 0.6);
+            border: 2px solid var(--violeta);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .categoria-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradiente-violeta);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .categoria-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--verde);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+
+        .categoria-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .categoria-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
             display: block;
         }
 
-        .countdown-label {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.8;
+        .categoria-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--blanco);
         }
 
-        .submission-section {
-            text-align: center;
+        .categoria-card ul {
+            text-align: left;
+            padding-left: 10px;
         }
 
-        .btn-submit {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-            color: #1a1a2e;
-            padding: 20px 50px;
-            font-size: 1.5rem;
+        .categoria-card li {
+            padding: 8px 0;
+            color: #ccc;
+            border-bottom: 1px solid rgba(123, 47, 190, 0.3);
+            font-size: 0.95rem;
+        }
+
+        .categoria-card li:last-child {
+            border-bottom: none;
+        }
+
+        .categoria-card li::before {
+            content: '▸ ';
+            color: var(--verde);
             font-weight: bold;
-            text-decoration: none;
+        }
+
+        /* ============================================
+           CALL TO ACTION (CTA)
+           ============================================ */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--negro) 100%);
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradiente-violeta);
+            color: var(--blanco);
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            padding: 20px 60px;
             border-radius: 50px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
             text-transform: uppercase;
             letter-spacing: 2px;
+            box-shadow: 
+                0 10px 30px rgba(123, 47, 190, 0.5),
+                0 0 0 0 rgba(123, 47, 190, 0.7);
+            animation: pulse-glow 2s infinite;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
         }
 
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
-            background: linear-gradient(135deg, #ffec8b 0%, #ffa500 100%);
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 15px 40px rgba(123, 47, 190, 0.7),
+                0 0 30px rgba(123, 47, 190, 0.5);
+            border-color: var(--verde);
         }
 
-        .footer {
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--negro);
+            padding: 50px 0 30px;
+            border-top: 3px solid var(--violeta);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--violeta);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            line-height: 2;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--verde);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
             text-align: center;
-            margin-top: 50px;
-            padding: 30px;
-            opacity: 0.7;
+            padding-top: 30px;
+            border-top: 1px solid rgba(123, 47, 190, 0.3);
+            color: #888;
             font-size: 0.9rem;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ============================================
+           ANIMACIONES
+           ============================================ */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -180,128 +506,311 @@
             }
         }
 
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(123, 47, 190, 0.5),
+                    0 0 0 0 rgba(123, 47, 190, 0.7);
+            }
+            50% {
+                box-shadow: 
+                    0 15px 40px rgba(123, 47, 190, 0.7),
+                    0 0 20px 10px rgba(123, 47, 190, 0);
+            }
+        }
+
+        /* Fade-in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN (MOBILE-FIRST)
+           ============================================ */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(26, 26, 26, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: left 0.3s ease;
             }
 
-            .theme {
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .fechas-container {
+                grid-template-columns: 1fr;
+            }
+
+            .fecha-banner-central {
+                order: -1;
+                margin-bottom: 20px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+
+            .categorias-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
                 font-size: 1.5rem;
             }
 
-            .countdown {
-                gap: 10px;
+            .fecha-card {
+                padding: 25px 20px;
             }
 
-            .countdown-item {
-                min-width: 80px;
-                padding: 15px;
+            .categoria-card {
+                padding: 20px;
             }
 
-            .countdown-number {
-                font-size: 2rem;
-            }
-
-            .btn-submit {
-                padding: 15px 30px;
+            .cta-button {
+                padding: 15px 40px;
                 font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>⚡ MAURIPROD GAME JAM ⚡️</h1>
-            <div class="theme">
-                TEMÁTICA: AGRO VS ROBÓTICA
-                <div class="theme-icons">🤖🌾</div>
-            </div>
-        </header>
-
-        <div class="card prize-section">
-            <div class="prize-icon">🏆</div>
-            <h2>PREMIO</h2>
-            <p style="font-size: 1.3rem; margin-top: 10px;">🥇 Primer puesto:</p>
-            <div class="prize-amount">$3000</div>
+    <!-- 
+    ================================================================
+    AGREGAR banner.jpg EN ESTA MISMA CARPETA
+    ================================================================
+    -->
+    
+    <!-- Header / Navbar -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">MAURI<span>PROD</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#inscripcion">Inscripción</a></li>
+                    <li><a href="#reglas">Reglas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
+    </header>
 
-        <div class="card countdown-section">
-            <h2 class="countdown-title">⏰ TIEMPO RESTANTE</h2>
-            <div class="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Días</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Horas</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Minutos</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Segundos</span>
-                </div>
+    <!-- Hero Section con banner.jpg de fondo -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-icons">🤖🌾</div>
+            <h1 class="hero-title">MAURIPROD <span>GAME JAM</span></h1>
+            <p class="hero-subtitle">AGRO VS ROBÓTICA</p>
+        </div>
+    </section>
+
+    <!-- Sección de Fechas Destacada -->
+    <section class="fechas-section">
+        <div class="fechas-container">
+            <div class="fecha-card first fade-in">
+                <h3>DEL CAMPO A LA INNOVACIÓN</h3>
+                <p>Planta tu idea.<br>Cosecha un juego.</p>
+            </div>
+            
+            <div class="fecha-banner-central fade-in">
+                <h2>DESDE 14 DE AGOSTO HASTA <span class="highlight">SÁBADO 29</span></h2>
+            </div>
+            
+            <div class="fecha-card second fade-in">
+                <h3>DE LA CIENCIA A LA ACCIÓN</h3>
+                <p>Programa el futuro.<br>Desafía lo posible.</p>
             </div>
         </div>
+    </section>
 
-        <div class="card submission-section">
-            <h2>🔗 LINK DE ENTREGA</h2>
-            <p style="margin-top: 15px; font-size: 1.2rem;">Fecha límite: 📅 29 de agosto</p>
+    <!-- Sección de Categorías -->
+    <section class="categorias-section" id="reglas">
+        <h2 class="section-title fade-in">CATEGORÍAS <span>TEMÁTICAS</span></h2>
+        
+        <div class="categorias-grid">
+            <!-- Categoría Naturaleza -->
+            <div class="categoria-card fade-in">
+                <span class="categoria-icon">🌱</span>
+                <h3>NATURALEZA</h3>
+                <ul>
+                    <li>Sustentabilidad ♻️</li>
+                    <li>Cultivo 🚜</li>
+                    <li>Tradición 🐄</li>
+                    <li>Tierra y Vida 🌍</li>
+                </ul>
+            </div>
+
+            <!-- Categoría Tecnología -->
+            <div class="categoria-card fade-in">
+                <span class="categoria-icon">💻</span>
+                <h3>TECNOLOGÍA</h3>
+                <ul>
+                    <li>Automatización ⚙️</li>
+                    <li>IA y Código 🤖</li>
+                    <li>Máquinas 🦾</li>
+                    <li>Innovación ⚡</li>
+                </ul>
+            </div>
+
+            <!-- Categoría Creatividad -->
+            <div class="categoria-card fade-in">
+                <span class="categoria-icon">🎮</span>
+                <h3>CREATIVIDAD</h3>
+                <ul>
+                    <li>Game Design 🎯</li>
+                    <li>Arte & Visual 🎨</li>
+                    <li>Sonido 🎵</li>
+                    <li>Narrativa 📖</li>
+                </ul>
+            </div>
+
+            <!-- Categoría Innovación -->
+            <div class="categoria-card fade-in">
+                <span class="categoria-icon">🚀</span>
+                <h3>INNOVACIÓN</h3>
+                <ul>
+                    <li>Fusión Agro-Tech 🌾🤖</li>
+                    <li>Soluciones Reales 💡</li>
+                    <li>Futuro Sostenible 🔮</li>
+                    <li>Impacto Social 🌟</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section" id="inscripcion">
+        <div class="container fade-in">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2Fm7oVtKoiMBdjsBfaqL6pFP6nAQLnU72zE6UzRgqXD6AKQ/viewform" 
-               class="btn-submit" 
-               target="_blank" 
+               class="cta-button" 
+               target="_blank"
                rel="noopener noreferrer">
-                👉 Enviar mi proyecto
+                INSCRIBITE AHORA
             </a>
         </div>
+    </section>
 
-        <div class="footer">
-            <p>© 2024 Mauriprod Game Jam - Todos los derechos reservados</p>
-            <p>¡Buena suerte a todos los participantes! 🎮✨</p>
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MAURIPROD GAME JAM</h4>
+                    <p>Un evento que fusiona el campo con la tecnología. Participá y mostrá tu talento en el desarrollo de videojuegos.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>ENLACES RÁPIDOS</h4>
+                    <a href="#inicio">Inicio</a><br>
+                    <a href="#inscripcion">Inscripción</a><br>
+                    <a href="#reglas">Reglas</a><br>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>CONTACTO</h4>
+                    <p>¿Tenés dudas?</p>
+                    <a href="mailto:info@mauriprod.com">info@mauriprod.com</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>SEGUINOS</h4>
+                    <a href="#">Instagram</a><br>
+                    <a href="#">Twitter</a><br>
+                    <a href="#">Discord</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mauriprod Game Jam. Todos los derechos reservados. | AGRO VS ROBÓTICA 🤖🌾</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
+    <!-- Scripts -->
     <script>
-        // Configurar la fecha límite (29 de agosto del año actual a las 23:59:59)
-        const currentYear = new Date().getFullYear();
-        const deadlineDate = new Date(`August 29, ${currentYear} 23:59:59`).getTime();
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-        // Si ya pasó el 29 de agosto de este año, usar el próximo año
-        const now = new Date().getTime();
-        const finalDeadline = now > deadlineDate ? 
-            new Date(`August 29, ${currentYear + 1} 23:59:59`).getTime() : 
-            deadlineDate;
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-        function updateCountdown() {
-            const currentTime = new Date().getTime();
-            const distance = finalDeadline - currentTime;
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
 
-            if (distance < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
-            }
+        // Fade-in on scroll animation
+        const fadeElements = document.querySelectorAll('.fade-in');
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const checkFade = () => {
+            const triggerBottom = window.innerHeight * 0.8;
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
 
-        // Actualizar inmediatamente y luego cada segundo
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+                if (elementTop < triggerBottom) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkFade);
+        checkFade(); // Check on initial load
+
+        // Smooth scroll for older browsers
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
